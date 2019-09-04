@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>A4 landscape</title>
+
+  <!-- Normalize or reset CSS with your favorite library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+
+  <!-- Load paper.css for happy printing -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
+
+  <!-- Set page size here: A5, A4 or A3 -->
+  <!-- Set also "landscape" if you need -->
+  <style>@page { size: A4 landscape }
+
+
+/*div {border:1px solid black}*/
+	.column {
+	float: left;
+	width: 50%;
+	}
+
+	/* Clear floats after the columns */
+	.row:after {
+	content: "";
+	display: table;
+	clear: both;
+	}
+  </style>
+</head>
+
+<!-- Set "A5", "A4" or "A3" for class name -->
+<!-- Set also "landscape" if you need -->
+<body class="A4 landscape">
+
+  <!-- Each sheet element should have the class "sheet" -->
+  <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
+  <section class="sheet padding-10mm">
+
+    <!-- Write HTML just like a web page -->
+    <article>
+	<center><h1>OpenWrt packages workshop cheatsheet</h1></center>
+	<div class="row">
+	<div class="column">
+<h2>Patching</h2>
+<h3>Prepare</h3>
+
+Prepare <b>pkg_name</b> source code for patching:
+
+<pre>
+make package/pkg_name/{clean,prepare} QUILT=1 V=S
+cd build_dir/target-arch_name/pkg_name
+</pre>
+
+<h3>Create patch</h3>
+
+Create new patch with quilt
+<pre>
+quilt new 010-main_code_fix.patch
+quilt add  code.c	# add file
+quilt edit code.c	# edit file
+quilt diff		# check code change
+quilt refresh		# save changes
+</pre>
+
+<h3>Save patch</h3>
+<pre>
+cd ~/openwrt_sdk_home
+make package/pkg_name/update V=s
+</pre>
+This will create patch in pkg_name/patches directory
+
+	
+</div>
+
+<div class="column">testik2</div>
+
+</div>
+    </article>
+
+  </section>
+
+</body>
+
+</html>
